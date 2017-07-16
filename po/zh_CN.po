@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: xiphos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-28 13:40+0200\n"
-"PO-Revision-Date: 2010-09-29 22:04+0100\n"
-"Last-Translator: Peter von Kaehne <refdoc@crosswire.org>\n"
+"PO-Revision-Date: 2017-07-16 21:34+0800\n"
+"Last-Translator: yetist <yetist@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
-"Language: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-04-19 03:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: ../src/backend/sword_main.cc:792
 msgid ""
@@ -24,6 +24,9 @@ msgid ""
 "Please report this. sword_main.cc:set_treekey\n"
 "What were you doing when this occurred?"
 msgstr ""
+"Xiphos失败了：“这不太可能发生”，display_mod：为空\n"
+"请报告这个问题。sword_main.cc：set_treekey\n"
+"发生这种情况时你正在进行什么样的操作？"
 
 #: ../src/backend/sword_main.cc:1149
 msgid "Configuration not found"
@@ -79,34 +82,29 @@ msgstr "关于 Sword 模块"
 #: ../src/gnome2/about_modules.c:219 ../src/gnome2/about_trans.c:168
 #: ../src/gnome2/find_dialog.c:288
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: ../src/gnome2/about_modules.c:411
-#, fuzzy
 msgid "<b>Module name:</b> "
-msgstr "<b>模块管理器</b>"
+msgstr "<b>模块名称：</b>"
 
 #: ../src/gnome2/about_modules.c:418
-#, fuzzy
 msgid "<b>Module abbreviation:</b> "
-msgstr "<b>模块列表</b>"
+msgstr "<b>模块缩写：</b>"
 
 #: ../src/gnome2/about_modules.c:423
-#, fuzzy
 msgid "<b>Version:</b> "
-msgstr "<b>选项</b>"
+msgstr "<b>版本：</b>"
 
 #: ../src/gnome2/about_modules.c:426
 msgid "No version stamp found"
-msgstr ""
+msgstr "未找到版本戳"
 
 #: ../src/gnome2/about_modules.c:429
-#, fuzzy
 msgid "<b>Type:</b> "
-msgstr "<b>范围</b>"
+msgstr "<b>类型：</b>"
 
 #: ../src/gnome2/about_modules.c:431
-#, fuzzy
 msgid "Daily Devotion"
 msgstr "每日灵修"
 
@@ -124,7 +122,7 @@ msgstr "图片"
 
 #: ../src/gnome2/about_modules.c:437
 msgid "Glossary"
-msgstr ""
+msgstr "词汇表"
 
 #: ../src/gnome2/about_modules.c:441
 msgid "Cult"
@@ -145,38 +143,32 @@ msgid "Dictionary"
 msgstr "字典"
 
 #: ../src/gnome2/about_modules.c:454
-#, fuzzy
 msgid "General Book"
 msgstr "普通书卷"
 
 #: ../src/gnome2/about_modules.c:459
-#, fuzzy
 msgid "Personal Commentary"
-msgstr "重命名注释"
+msgstr "个人注解"
 
 #: ../src/gnome2/about_modules.c:462
-#, fuzzy
 msgid "Journal"
 msgstr "日记"
 
 #: ../src/gnome2/about_modules.c:465
-#, fuzzy
 msgid "Unknown type"
-msgstr "未知"
+msgstr "未知类型"
 
 #: ../src/gnome2/about_modules.c:471
-#, fuzzy
 msgid "<b>Language:</b> "
-msgstr "<b>范围</b>"
+msgstr "<b>语言：</b>"
 
 #: ../src/gnome2/about_modules.c:474
 msgid "Not specified"
-msgstr ""
+msgstr "未指定"
 
 #: ../src/gnome2/about_modules.c:483
-#, fuzzy
 msgid "<b>Installed size:</b> "
-msgstr "<b>安装数据源</b>"
+msgstr "<b>安装大小：</b>"
 
 #: ../src/gnome2/about_modules.c:491
 #, fuzzy
@@ -184,54 +176,44 @@ msgid "<b>Companion module(s):</b></br>"
 msgstr "<b>主要窗口模块</b>"
 
 #: ../src/gnome2/about_modules.c:501
-#, fuzzy
 msgid "<b>Features:</b>"
-msgstr "<b>格式</b>"
+msgstr "<b>特点：</b>"
 
 #: ../src/gnome2/about_modules.c:505
-#, fuzzy
 msgid "*&nbsp;Headings"
-msgstr "标题"
+msgstr "*&nbsp;标题"
 
 #: ../src/gnome2/about_modules.c:513
-#, fuzzy
 msgid "*&nbsp;Footnotes"
-msgstr "脚注注释"
+msgstr "*&nbsp;脚注注释"
 
 #: ../src/gnome2/about_modules.c:519
-#, fuzzy
 msgid "*&nbsp;Cross references"
-msgstr "交叉引用"
+msgstr "*&nbsp;交叉引用"
 
 #: ../src/gnome2/about_modules.c:526
-#, fuzzy
 msgid "*&nbsp;Strong's numbers"
-msgstr "突出数字"
+msgstr "*&nbsp;突出数字"
 
 #: ../src/gnome2/about_modules.c:534
-#, fuzzy
 msgid "*&nbsp;Morphological tags"
-msgstr "形态标签 单选按钮"
+msgstr "*&nbsp;形态标签"
 
 #: ../src/gnome2/about_modules.c:540
-#, fuzzy
 msgid "*&nbsp;Lemmas"
-msgstr "引理"
+msgstr "*&nbsp;引理"
 
 #: ../src/gnome2/about_modules.c:548
-#, fuzzy
 msgid "*&nbsp;Words of Christ in red"
-msgstr "基督的话语用红字显示"
+msgstr "*&nbsp;基督的话语用红字显示"
 
 #: ../src/gnome2/about_modules.c:553
-#, fuzzy
 msgid "*&nbsp;Greek accents"
-msgstr "希腊口音"
+msgstr "*&nbsp;希腊口音"
 
 #: ../src/gnome2/about_modules.c:559
-#, fuzzy
 msgid "*&nbsp;Hebrew Vowel Points"
-msgstr "希伯来文元音点"
+msgstr "*&nbsp;希伯来文元音点"
 
 #: ../src/gnome2/about_modules.c:565
 #, fuzzy
@@ -264,9 +246,8 @@ msgid "*&nbsp;<i>No features found</i>"
 msgstr ""
 
 #: ../src/gnome2/about_modules.c:612
-#, fuzzy
 msgid "<b>Distribution license:</b>"
-msgstr "<b>属性</b>"
+msgstr "<b>发布协议：</b>"
 
 #: ../src/gnome2/about_modules.c:625
 #, fuzzy
@@ -290,10 +271,9 @@ msgstr ""
 
 #: ../src/gnome2/about_sword.c:98
 msgid "The SWORD Project"
-msgstr ""
+msgstr "SWORD 工程"
 
 #: ../src/gnome2/about_trans.c:82
-#, fuzzy
 msgid ""
 "Do you like using Xiphos to study the Bible? Would you like to see its user "
 "interface in your native language? You could translate Xiphos! \n"
@@ -304,7 +284,10 @@ msgid ""
 "appreciated!"
 msgstr ""
 "你喜欢使用Xiphos研究圣经吗？你想看到它的显示使用您的母语是什么？你可以翻译"
-"Xiphos！"
+"Xiphos！\n"
+"\n"
+"我们一直在寻找志愿者来把 Xiphos 翻译成其他语言。如果您能为我们翻译，请参阅下"
+"面的链接，联系我们，并参与我们的努力。非常感谢您的帮助！"
 
 #: ../src/gnome2/about_trans.c:96
 msgid "About Xiphos Translation"
@@ -319,9 +302,8 @@ msgid "Xiphos development"
 msgstr "Xiphos 开发项目"
 
 #: ../src/gnome2/about_xiphos.c:129
-#, fuzzy
 msgid "Copyright © 2000-2016 Xiphos Development Team"
-msgstr "版权所有 2000-2016 Xiphos 开发项目组"
+msgstr "版权所有 © 2000-2016 Xiphos 开发项目组"
 
 #: ../src/gnome2/about_xiphos.c:131
 msgid ""
@@ -357,9 +339,8 @@ msgid "Folder: "
 msgstr "文件夹： "
 
 #: ../src/gnome2/bookmarks_menu.c:200
-#, fuzzy
 msgid "Specify bookmarks file"
-msgstr "编辑书签"
+msgstr "指定的书签文件"
 
 #: ../src/gnome2/bookmarks_menu.c:350 ../ui/xi-menus.glade.h:61
 #: ../ui/xi-menus-popup.gtkbuilder.h:29
@@ -406,13 +387,13 @@ msgstr "标签： "
 #: ../src/gnome2/export_bookmarks.c:229
 #, c-format
 msgid "Search result: %s"
-msgstr ""
+msgstr "搜索结果：%s"
 
 #: ../src/gnome2/bookmarks_treeview.c:747
 msgid ""
 "Opening a multi-reference bookmark in\n"
 "separate tabs is not supported."
-msgstr ""
+msgstr "不支持在单独的标签页中打开多个参考书签。"
 
 #: ../src/gnome2/bookmarks_treeview.c:846 ../src/gnome2/sidebar.c:1508
 #: ../src/gnome2/sidebar.c:1560
@@ -429,9 +410,8 @@ msgid "for:"
 msgstr "授予:"
 
 #: ../src/gnome2/cipher_key_dialog.c:67
-#, fuzzy
 msgid "Enter Key: "
-msgstr "输入密码钥匙 "
+msgstr "输入密钥： "
 
 #: ../src/gnome2/dialog.c:289
 msgid "Close without Saving"
@@ -519,22 +499,21 @@ msgid "BUG! Xiphos is about to crash due to a \"STRING\" error."
 msgstr "囧！Xiphos由于“STRING”错误而崩溃。"
 
 #: ../src/gnome2/main_window.c:587
-#, fuzzy, c-format
+#, c-format
 msgid "Module has no support for %s."
-msgstr "在模块中有突出数码"
+msgstr "模块不支持 %s。"
 
 #: ../src/gnome2/main_window.c:660
-#, fuzzy
 msgid "Xiphos: No windows."
-msgstr "Xiphos"
+msgstr "Xiphos：没有窗口。"
 
 #: ../src/gnome2/main_window.c:711
 msgid "BibleSync: Current navigation sent."
-msgstr ""
+msgstr "BibleSync：当前的导航已经发送。"
 
 #: ../src/gnome2/main_window.c:713
 msgid "BibleSync: Not speaking."
-msgstr ""
+msgstr "BibleSync：没有发出声音。"
 
 #: ../src/gnome2/main_window.c:931
 msgid "Xiphos - Bible Study Software"
@@ -627,7 +606,7 @@ msgstr ""
 
 #: ../src/gnome2/menu_popup.c:2032
 msgid "No module in this pane."
-msgstr ""
+msgstr "此窗格中没有模块。"
 
 #. *****************************************************************************
 #. * defines
@@ -746,7 +725,7 @@ msgstr "安装"
 
 #: ../src/gnome2/mod_mgr.c:199
 msgid "Archive these modules?"
-msgstr ""
+msgstr "归档这些模块？"
 
 #: ../src/gnome2/mod_mgr.c:200
 msgid "Preparing to archive"
@@ -835,8 +814,8 @@ msgid ""
 msgstr "锁形图标表示这个模块被加密，您需要向内容所有者购买一个解锁密码键"
 
 #: ../src/gnome2/mod_mgr.c:664 ../src/main/biblesync_glue.cc:596
-#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2
-#: ../ui/xi-menus.glade.h:55 ../ui/xi-menus-popup.gtkbuilder.h:35
+#: ../ui/gtk2_webedit.ui.h:2 ../ui/gtk_webedit.ui.h:2 ../ui/xi-menus.glade.h:55
+#: ../ui/xi-menus-popup.gtkbuilder.h:35
 msgid "About"
 msgstr "关于"
 
@@ -927,7 +906,7 @@ msgstr "词典"
 #: ../src/gnome2/mod_mgr.c:1548 ../src/gnome2/utilities.c:593
 #: ../src/main/sidebar.cc:1003 ../src/main/sidebar.cc:1005
 msgid "Glossaries"
-msgstr ""
+msgstr "词汇"
 
 #: ../src/gnome2/mod_mgr.c:1552 ../src/gnome2/utilities.c:600
 #: ../src/main/sidebar.cc:1012 ../src/main/sidebar.cc:1014
@@ -943,7 +922,7 @@ msgstr "普通书卷"
 #: ../src/gnome2/mod_mgr.c:1569 ../src/gnome2/utilities.c:624
 #: ../src/main/sidebar.cc:1048 ../src/main/sidebar.cc:1050
 msgid "Cult/Unorthodox"
-msgstr ""
+msgstr "邪教或异端"
 
 #: ../src/gnome2/mod_mgr.c:1578
 msgid ""
@@ -963,7 +942,7 @@ msgstr "没有安装"
 #: ../src/gnome2/utilities.c:632 ../src/main/prayerlists.cc:228
 #: ../src/main/sidebar.cc:1058 ../src/main/sidebar.cc:1060
 msgid "Prayer List/Journal"
-msgstr ""
+msgstr "祷告事项/日记"
 
 #: ../src/gnome2/mod_mgr.c:1770
 msgid "Refreshing from remote source"
@@ -1065,7 +1044,7 @@ msgstr ""
 
 #: ../src/gnome2/mod_mgr.c:2685
 msgid "No obsolete modules were found."
-msgstr ""
+msgstr "没有发现过时的模块。"
 
 #: ../src/gnome2/mod_mgr.c:2707
 msgid "Standard remote sources have been loaded."
@@ -1123,7 +1102,7 @@ msgstr "整个模块"
 
 #: ../src/gnome2/navbar_book.c:356 ../src/gnome2/navbar_book_dialog.c:300
 msgid "Go outward, to the section containing this one"
-msgstr ""
+msgstr "返回，到包含它的部分"
 
 #: ../src/gnome2/navbar_book.c:380 ../src/gnome2/navbar_book_dialog.c:326
 msgid "Go to previous item"
@@ -1165,11 +1144,11 @@ msgstr "类似视图"
 
 #: ../src/gnome2/preferences_dialog.c:864
 msgid "BibleSync session passphrase"
-msgstr ""
+msgstr "BibleSync会话密码"
 
 #: ../src/gnome2/preferences_dialog.c:866
 msgid "Phrase:"
-msgstr ""
+msgstr "短语："
 
 #. mode selection failed? probably dead interface
 #: ../src/gnome2/preferences_dialog.c:937
@@ -1190,7 +1169,7 @@ msgstr ""
 
 #: ../src/gnome2/preferences_dialog.c:991
 msgid "Disabled"
-msgstr ""
+msgstr "已禁用"
 
 #: ../src/gnome2/preferences_dialog.c:993 ../src/main/xml.c:96
 msgid "Personal"
@@ -1237,9 +1216,8 @@ msgstr "选项"
 
 #: ../src/gnome2/preferences_dialog.c:2007 ../ui/prefs.glade.h:85
 #: ../ui/prefs.gtkbuilder.h:85
-#, fuzzy
 msgid "BibleSync"
-msgstr "圣经"
+msgstr "BibleSync"
 
 #: ../src/gnome2/preferences_dialog.c:2011
 msgid "Fonts"
@@ -1250,9 +1228,8 @@ msgid "Color"
 msgstr "颜色"
 
 #: ../src/gnome2/preferences_dialog.c:2017
-#, fuzzy
 msgid "Sizes and Faces"
-msgstr "标签和窗格"
+msgstr "大小和界面"
 
 #: ../src/gnome2/preferences_dialog.c:2031
 msgid "Special"
@@ -1292,7 +1269,7 @@ msgstr "查找位于 "
 #: ../src/gnome2/search_dialog.c:483
 #, c-format
 msgid "New List %s"
-msgstr ""
+msgstr "新列表 %s"
 
 #: ../src/gnome2/search_dialog.c:700
 msgid "The last module list may not be deleted"
@@ -1486,7 +1463,7 @@ msgstr "首选项"
 
 #: ../src/gnome2/sidebar.c:936
 msgid "List:"
-msgstr ""
+msgstr "列表："
 
 #: ../src/gnome2/sidebar.c:1519 ../src/gnome2/sidebar.c:1569
 msgid "Search"
@@ -1631,9 +1608,8 @@ msgid "Last navigation was Direct or Indirect"
 msgstr ""
 
 #: ../src/main/biblesync_glue.cc:587
-#, fuzzy
 msgid "Last Navigation"
-msgstr "救恩"
+msgstr "最后的导航"
 
 #: ../src/main/biblesync_glue.cc:606
 msgid "UUID"
@@ -1641,25 +1617,29 @@ msgstr ""
 
 #: ../src/main/biblesync_glue.cc:626
 msgid "IP address: "
-msgstr ""
+msgstr "IP地址："
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Application: "
 msgstr ""
+"\n"
+"应用程序："
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "Device: "
 msgstr ""
+"\n"
+"设备："
 
 #: ../src/main/biblesync_glue.cc:626
 msgid ""
 "\n"
 "UUID: "
-msgstr ""
+msgstr "UUID："
 
 #: ../src/main/display.cc:89
 msgid ""
@@ -1875,7 +1855,7 @@ msgstr "<b>杂项</b><br>"
 
 #: ../src/main/prayerlists.cc:122
 msgid "Point x"
-msgstr ""
+msgstr "x 点"
 
 #: ../src/main/prayerlists.cc:123
 msgid "<b>(x)</b><br/>"
@@ -2811,16 +2791,15 @@ msgstr "复制"
 
 #: ../ui/gtk2_webedit.ui.h:7 ../ui/gtk_webedit.ui.h:7
 msgid "Copy selection to clipboard"
-msgstr ""
+msgstr "复制到剪贴板"
 
 #: ../ui/gtk2_webedit.ui.h:8 ../ui/gtk_webedit.ui.h:8
 msgid "Cut"
-msgstr ""
+msgstr "剪切"
 
 #: ../ui/gtk2_webedit.ui.h:9 ../ui/gtk_webedit.ui.h:9
-#, fuzzy
 msgid "Cut selection"
-msgstr "模块选择"
+msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:10 ../ui/gtk_webedit.ui.h:10
 msgid "Decrease indent"
@@ -2835,7 +2814,6 @@ msgid "Decrease paragraph indent"
 msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:13 ../ui/gtk_webedit.ui.h:13
-#, fuzzy
 msgid "Delete selection"
 msgstr "删除选择的范围"
 
@@ -2844,7 +2822,6 @@ msgid "Delete"
 msgstr "删除"
 
 #: ../ui/gtk2_webedit.ui.h:15 ../ui/gtk_webedit.ui.h:15
-#, fuzzy
 msgid "Remove selection"
 msgstr "移除所选项目"
 
@@ -2864,12 +2841,10 @@ msgid "Search current document"
 msgstr "搜索整个模块"
 
 #: ../ui/gtk2_webedit.ui.h:20 ../ui/gtk_webedit.ui.h:20
-#, fuzzy
 msgid "Font"
 msgstr "字体"
 
 #: ../ui/gtk2_webedit.ui.h:21 ../ui/gtk_webedit.ui.h:21
-#, fuzzy
 msgid "Change font"
 msgstr "变更字体为"
 
@@ -2919,12 +2894,10 @@ msgid "Insert link"
 msgstr "插入链接"
 
 #: ../ui/gtk2_webedit.ui.h:32 ../ui/gtk_webedit.ui.h:32
-#, fuzzy
 msgid "Link"
 msgstr "链接"
 
 #: ../ui/gtk2_webedit.ui.h:33 ../ui/gtk_webedit.ui.h:33
-#, fuzzy
 msgid "Insert a link"
 msgstr "插入链接"
 
@@ -2962,7 +2935,6 @@ msgid "Xiphos Link"
 msgstr "Xiphos"
 
 #: ../ui/gtk2_webedit.ui.h:41 ../ui/gtk_webedit.ui.h:41
-#, fuzzy
 msgid "Xiphos"
 msgstr "Xiphos"
 
@@ -2994,7 +2966,7 @@ msgstr ""
 
 #: ../ui/gtk2_webedit.ui.h:48 ../ui/gtk_webedit.ui.h:48
 msgid "Center"
-msgstr ""
+msgstr "居中"
 
 #: ../ui/gtk2_webedit.ui.h:49 ../ui/gtk_webedit.ui.h:49
 msgid "Center justify paragraph"
