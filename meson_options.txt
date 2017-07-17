@@ -1,0 +1,68 @@
+### Main Xiphos Options
+option('gtk',
+  type: 'combo',
+  choices: ['auto', '3', '2'],
+  value: 'auto',
+  description: 'Select gtk+ API [*"auto", "3", "2"]')
+
+### Miscellaneous Options
+#option('debug-level', type:'combo', choices:['ultradebug', 'debug', 'release', 'optimized'], value:'ultradebug', description: 'Specify the debugging level ["ultradebug", "debug", "release", "optimized"]')
+# --debug-level: use --buildtype
+# --strip: meson has this option.
+option('enable-delint',
+  type: 'boolean',
+  value: false,
+  description: 'Use -Wall -Werror (default:disabled)')
+
+option('chatty',
+  type: 'boolean',
+  value : false,
+  description: 'Enable lots of tracing (default:disabled)')
+
+option('webkit-editor',
+  type: 'boolean',
+  value : false,
+  description: 'Use webkit editor (default:disabled)')
+
+option('webkit2',
+  type: 'boolean',
+  value : true,
+  description: 'Use webkit2 instead of original webkit (default:enabled)')
+
+option('dbus',
+  type: 'boolean',
+  value : true,
+  description: 'Enable the Xiphos dbus API (default:enabled)')
+
+### cross compilation from Linux/Unix for win32
+option('target-platform-win32',
+  type: 'boolean',
+  value: false,
+  description: 'Cross-compile for win32 (default:disabled)')
+
+option('disable-console',
+  type: 'boolean',
+  value: true,
+  description: 'Disable console window in win32 (default:enabled)')
+
+option('pkgconf-libdir',
+  type: 'string',
+  description: 'Specify dir with *.pc files for cross-compilation')
+
+option('pkgconf-prefix',
+  type: 'string',
+  description: 'Specify prefix with folders for headers and libraries for cross-compilation')
+
+### Localization and documentation
+option('helpdir',
+  type: 'string',
+  description: 'user documentation [default: ${DATAROOTDIR}/gnome/help/${PACKAGE}]')
+
+option('disable-help',
+  type: 'boolean',
+  value : true,
+  description: 'Disable creating help files (default:enabled)')
+
+option('no-post-install',
+  type: 'boolean',
+  value : true, description: 'Disable post-install tasks (default:enabled)')
