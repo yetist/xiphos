@@ -22,13 +22,12 @@
 #ifndef _SLIB_EDITOR_H
 #define _SLIB_EDITOR_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+G_BEGIN_DECLS
 
 #include <config.h>
 
-#ifndef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) || defined(USE_WEBKIT2_EDITOR)
+//#else
 
 #include <gtk/gtk.h>
 
@@ -79,8 +78,6 @@ void editor_save_book(EDITOR *e);
 void editor_maybe_save_all(void);
 GtkWidget *editor_new(const gchar *title, EDITOR *e);
 
-#ifdef __cplusplus
-}
-#endif
+G_END_DECLS
 #endif /* !USE_WEBKIT_EDITOR */
 #endif /* _SLIB_EDITOR_H */

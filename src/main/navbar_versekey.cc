@@ -35,7 +35,7 @@
 #include "gui/navbar_versekey.h"
 #include "gui/tabbed_browser.h"
 
-#ifdef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) || defined(USE_WEBKIT2_EDITOR)
 #include "editor/webkit_editor.h"
 #else
 #include "editor/slib-editor.h"

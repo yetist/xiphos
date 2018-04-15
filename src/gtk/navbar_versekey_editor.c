@@ -28,7 +28,7 @@
 #include <glade/glade-xml.h>
 #endif
 
-#ifdef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) || defined(USE_WEBKIT2_EDITOR)
 #include "editor/webkit_editor.h"
 #else
 #include "editor/slib-editor.h"

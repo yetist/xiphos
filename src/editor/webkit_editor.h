@@ -28,7 +28,7 @@
 extern "C" {
 #endif
 
-#ifdef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) || defined(USE_WEBKIT2_EDITOR)
 
 #include <gtk/gtk.h>
 

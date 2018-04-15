@@ -29,7 +29,7 @@ extern "C" {
 #include <config.h>
 #include <glib.h>
 
-#ifdef USE_WEBKIT_EDITOR
+#if defined(USE_WEBKIT_EDITOR) || defined(USE_WEBKIT2_EDITOR)
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
 #else
