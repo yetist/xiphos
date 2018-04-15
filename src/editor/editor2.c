@@ -212,6 +212,8 @@ void editor_get_document_content(GString *data, EDITOR *e)
 
 gchar *editor_get_selected_text(EDITOR *e)
 {
+	editor_execute_script("window.getSelection().getRangeAt(0).toString()", e);
+	//web_view.run_javascript("window.getSelection().getRangeAt(0).toString()")
 #if 0
 	WebKitDOMDocument *dom_document;
 	WebKitDOMDOMWindow *window = NULL;
@@ -321,12 +323,46 @@ void editor_replace_string(gchar *old_string, gchar *new_string,
  * Return value
  *   void
  */
+void execute_script_done( GObject *object, GAsyncResult *result, gpointer user_data)
+{
+	/* empty */
+	WebKitJavascriptResult *js_result;
+	JSValueRef              value;
+	JSGlobalContextRef      context;
+	GError                 *error = NULL;
+
+	js_result = webkit_web_view_run_javascript_finish (WEBKIT_WEB_VIEW (object), result, &error);
+	if (!js_result) {
+		g_warning ("Error running javascript: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	context = webkit_javascript_result_get_global_context (js_result);
+	value = webkit_javascript_result_get_value (js_result);
+	if (JSValueIsString (context, value)) {
+		JSStringRef js_str_value;
+		gchar      *str_value;
+		gsize       str_length;
+
+		js_str_value = JSValueToStringCopy (context, value, NULL);
+		str_length = JSStringGetMaximumUTF8CStringSize (js_str_value);
+		str_value = (gchar *)g_malloc (str_length);
+		JSStringGetUTF8CString (js_str_value, str_value, str_length);
+		JSStringRelease (js_str_value);
+		g_print ("Script result: %s\n", str_value);
+		g_free (str_value);
+	} else {
+		g_warning ("Error running javascript: unexpected return value");
+	}
+	webkit_javascript_result_unref (js_result);
+}
 
 void editor_execute_script(gchar *script, EDITOR *e)
 {
 	if (script) {
-		//webkit_web_view_execute_script(WEBKIT_WEB_VIEW(e->html_widget), script);
-		webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW(e->html_widget), script);
+		g_print("call here, insert [%s]\n", script);
+		webkit_web_view_run_javascript (WEBKIT_WEB_VIEW(e->html_widget), script, NULL, execute_script_done, NULL);
 		XI_message(("script: %s", script));
 	}
 }
