@@ -88,11 +88,7 @@ G_MODULE_EXPORT void button_ok_clicked_cb(GObject *object, EDITOR *e)
 
 	XI_message(("link: %s", str->str));
 
-#ifdef USE_WEBKIT2_EDITOR
 	editor_insert_html(str->str, e);
-#else
-	gtkhtml_editor_insert_html(GTKHTML_EDITOR(e->window), str->str);
-#endif
 	g_string_free(str, TRUE);
 	g_free((gchar *)encoded_mod);
 	g_free((gchar *)encoded_verse);
