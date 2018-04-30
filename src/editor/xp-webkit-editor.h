@@ -40,13 +40,13 @@ typedef struct _XpWebkitEditorClass        XpWebkitEditorClass;
 
 struct _XpWebkitEditor
 {
-  WebKitWebView parent_instance;
-  XpWebkitEditorPrivate * priv;
+	WebKitWebView parent_instance;
+	XpWebkitEditorPrivate * priv;
 };
 
 struct _XpWebkitEditorClass
 {
-  WebKitWebViewClass parent_class;
+	WebKitWebViewClass parent_class;
 };
 
 GType               xp_webkit_editor_get_type           (void) G_GNUC_CONST;

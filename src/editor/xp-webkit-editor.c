@@ -53,8 +53,8 @@ G_DEFINE_TYPE (XpWebkitEditor, xp_webkit_editor, WEBKIT_TYPE_WEB_VIEW);
 
 #define XP_WEBKIT_EDITOR_GET_PRIVATE(obj)  (G_TYPE_INSTANCE_GET_PRIVATE((obj), XP_TYPE_WEBKIT_EDITOR, XpWebkitEditorPrivate))
 
-typedef gboolean GetFormatFunc (EEditorSelection*);
-typedef void     SetFormatFunc (EEditorSelection*, gboolean);
+typedef gboolean GetFormatFunc (XpEditorSelection*);
+typedef void     SetFormatFunc (XpEditorSelection*, gboolean);
 typedef struct _XpWebkitEditorPrivate        XpWebkitEditorPrivate;
 
 struct _XpWebkitEditorPrivate
@@ -66,7 +66,7 @@ struct _XpWebkitEditorPrivate
 	gchar *selected_text;
 	BlockFormat block_format;
 	gboolean first_load;
-	EEditorSelection *sel;
+	XpEditorSelection *sel;
 };
 
 static void xp_webkit_editor_set_property  (GObject          *object,
@@ -109,7 +109,7 @@ static WebKitWebContext * xp_webkit_editor_get_web_context (void)
 	return web_context;
 }
 
-static WebKitSettings * xp_webkit_editor_get_web_settings (void)
+static WebKitSettings* xp_webkit_editor_get_web_settings (void)
 {
 	static WebKitSettings *settings = NULL;
 
@@ -126,7 +126,7 @@ static WebKitSettings * xp_webkit_editor_get_web_settings (void)
 	return settings;
 }
 
-static void xp_toggle_format (EEditorSelection *sel, GetFormatFunc get_format, SetFormatFunc set_format)
+static void xp_toggle_format (XpEditorSelection *sel, GetFormatFunc get_format, SetFormatFunc set_format)
 {
 	set_format (sel, !get_format (sel));
 }
@@ -254,7 +254,6 @@ void xp_webkit_editor_set_font (XpWebkitEditor *self, gchar *font)
 	pango_font_description_free (font_desc);
 }
 
-
 static void xp_webkit_editor_init (XpWebkitEditor *webkit_editor)
 {
 	XpWebkitEditorPrivate *priv;
@@ -262,7 +261,6 @@ static void xp_webkit_editor_init (XpWebkitEditor *webkit_editor)
 	self->priv = XP_WEBKIT_EDITOR_GET_PRIVATE (webkit_editor);
 
 }
-
 
 static void xp_webkit_editor_finalize (GObject *object)
 {
@@ -537,10 +535,7 @@ static void xp_webkit_editor_constructed (GObject *obj)
 			G_CALLBACK (on_load_change), NULL);
 }
 
-static void xp_webkit_editor_set_property (GObject      *object,
-		guint         prop_id,
-		const GValue *value,
-		GParamSpec   *pspec)
+static void xp_webkit_editor_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
 	XpWebkitEditor *webkit_editor;
 
@@ -557,10 +552,7 @@ static void xp_webkit_editor_set_property (GObject      *object,
 	}
 }
 
-	static void xp_webkit_editor_get_property (GObject      *object,
-		guint         prop_id,
-		GValue       *value,
-		GParamSpec   *pspec)
+static void xp_webkit_editor_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
 	XpWebkitEditor *webkit_editor;
 
