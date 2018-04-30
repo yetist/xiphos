@@ -40,13 +40,13 @@ typedef struct _XpEditorSelectionClass        XpEditorSelectionClass;
 
 struct _XpEditorSelection
 {
-  GObject      object;
-  XpEditorSelectionPrivate *priv;
+	GObject      object;
+	XpEditorSelectionPrivate *priv;
 };
 
 struct _XpEditorSelectionClass
 {
-  GObjectClass     parent_class;
+	GObjectClass     parent_class;
 };
 
 GType                  xp_editor_selection_get_type           (void) G_GNUC_CONST;

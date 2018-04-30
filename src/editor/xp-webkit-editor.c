@@ -28,7 +28,7 @@
 enum {
 	EDITOR_CLOSED,
 	CONTENT_CHANGED,
-	LAST_SIGNALS
+	LAST_SIGNAL
 };
 
 /* Prop */
@@ -45,7 +45,7 @@ typedef enum {
 	BLOCK_FORMAT_ORDERED_LIST
 } BlockFormat;
 
-static guint xp_editor_signals [LAST_SIGNALS] = { 0 };
+static guint xp_editor_signals [LAST_SIGNAL] = { 0 };
 
 static GParamSpec *properties[NUM_PROP] = { NULL, };
 
