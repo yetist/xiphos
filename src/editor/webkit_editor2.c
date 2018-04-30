@@ -227,8 +227,8 @@ action_justify_full_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_bold_activate_cb(GtkWidget *widget, EDITOR *e)
 {
-	if (buttons_state.nochange)
-		return;
+	//if (buttons_state.nochange)
+	//	return;
 
 	editor_execute_script("document.execCommand('bold',false,false);", e);
 }

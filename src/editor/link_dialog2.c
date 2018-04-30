@@ -2,7 +2,7 @@
  * Xiphos Bible Study Tool
  * link_dialog.c - dialog for inserting a link
  *
- * Copyright (C) 2005-2017 Xiphos Developer Team
+ * Copyright (C) 2005-2018 Xiphos Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -135,7 +135,7 @@ void editor_link_dialog(EDITOR *e)
 	GtkBuilder *builder;
 	gchar *gbuilder_file;
 
-#ifndef USE_WEBKIT2_EDITOR
+#if !defined(USE_WEBKIT2_EDITOR)
 	GtkHTML *html = gtkhtml_editor_get_html(GTKHTML_EDITOR(e->window));
 	if (html->pointer_url) /* are we in a link */
 		return;	/* if so don't do anything */
