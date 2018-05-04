@@ -26,7 +26,7 @@
 #include "xp-editor-selection.h"
 
 enum {
-    LAST_SIGNAL
+	LAST_SIGNAL
 };
 
 enum {
@@ -47,83 +47,10 @@ struct _XpEditorSelectionPrivate
 	WebKitEditorTypingAttributes attrs;
 };
 
-static void xp_editor_selection_set_property  (GObject          *object,
-                                         guint             prop_id,
-                                         const GValue     *value,
-                                         GParamSpec       *pspec);
-static void xp_editor_selection_get_property  (GObject          *object,
-                                         guint             prop_id,
-                                         GValue           *value,
-                                         GParamSpec       *pspec);
+static void xp_editor_selection_set_property  (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec);
+static void xp_editor_selection_get_property  (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec);
 
 G_DEFINE_TYPE (XpEditorSelection, xp_editor_selection, G_TYPE_OBJECT);
-
-static void
-xp_editor_selection_class_init (XpEditorSelectionClass *class)
-{
-    GObjectClass *gobject_class = G_OBJECT_CLASS (class);
-    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (class);
-
-    gobject_class->set_property = xp_editor_selection_set_property;
-    gobject_class->get_property = xp_editor_selection_get_property;
-
-    g_type_class_add_private (class, sizeof (XpEditorSelectionPrivate));
-}
-
-static void
-xp_editor_selection_init (XpEditorSelection *editor_selection)
-{
-    XpEditorSelectionPrivate *priv;
-
-    priv = XP_EDITOR_SELECTION_GET_PRIVATE (editor_selection);
-
-}
-
-XpEditorSelection*
-xp_editor_selection_new (void)
-{
-    return g_object_new (XP_TYPXP_EDITOR_SELECTION, NULL);
-}
-
-static void
-xp_editor_selection_set_property (GObject      *object,
-                            guint         prop_id,
-                            const GValue *value,
-                            GParamSpec   *pspec)
-{
-    XpEditorSelection *editor_selection;
-
-    editor_selection = XP_EDITOR_SELECTION (object);
-
-    switch (prop_id)
-    {
-
-        default:
-            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-            break;
-    }
-}
-
-static void
-xp_editor_selection_get_property (GObject      *object,
-                            guint         prop_id,
-                            GValue       *value,
-                            GParamSpec   *pspec)
-{
-    XpEditorSelection *editor_selection;
-
-    editor_selection = XP_EDITOR_SELECTION (object);
-
-    switch (prop_id)
-    {
-
-        default:
-            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-            break;
-    }
-}
-
-// below newcode ////////////////////
 
 static void check_and_update_typing_attr (XpEditorSelection *selection, WebKitEditorTypingAttributes attrs, unsigned attr, const char *poperty_name)
 {
@@ -168,10 +95,7 @@ static void editor_selection_set_webview (XpEditorSelection *selection, WebKitWe
 }
 
 
-static void xp_editor_selection_get_property (GObject *object,
-		guint property_id,
-		GValue *value,
-		GParamSpec *pspec)
+static void xp_editor_selection_get_property (GObject *object, guint property_id, GValue *value, GParamSpec *pspec)
 {
 	XpEditorSelection *selection = XP_EDITOR_SELECTION (object);
 
@@ -194,11 +118,7 @@ static void xp_editor_selection_get_property (GObject *object,
 	}
 }
 
-	static void
-xp_editor_selection_set_property (GObject *object,
-		guint property_id,
-		const GValue *value,
-		GParamSpec *pspec)
+static void xp_editor_selection_set_property (GObject *object, guint property_id, const GValue *value, GParamSpec *pspec)
 {
 	XpEditorSelection *selection = XP_EDITOR_SELECTION (object);
 
@@ -236,8 +156,6 @@ static void xp_editor_selection_finalize (GObject *object)
 static void xp_editor_selection_class_init (XpEditorSelectionClass *klass)
 {
 	GObjectClass *object_class;
-
-	g_type_class_add_private (klass, sizeof (XpEditorSelectionPrivate));
 
 	object_class = G_OBJECT_CLASS (klass);
 	object_class->get_property = xp_editor_selection_get_property;
@@ -283,6 +201,7 @@ static void xp_editor_selection_class_init (XpEditorSelectionClass *klass)
 				NULL,
 				FALSE,
 				G_PARAM_READWRITE));
+	g_type_class_add_private (klass, sizeof (XpEditorSelectionPrivate));
 }
 
 
