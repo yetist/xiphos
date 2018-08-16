@@ -37,9 +37,7 @@ enum {
 	PROP_STRIKE_THROUGH,
 };
 
-#define XP_EDITOR_SELECTION_GET_PRIVATE(obj)  (G_TYPE_INSTANCE_GET_PRIVATE((obj), XP_TYPXP_EDITOR_SELECTION, XpEditorSelectionPrivate))
-
-typedef struct _XpEditorSelectionPrivate        XpEditorSelectionPrivate;
+//#define XP_EDITOR_SELECTION_GET_PRIVATE(obj)  (G_TYPE_INSTANCE_GET_PRIVATE((obj), XP_EDITOR_SELECTION, XpEditorSelectionPrivate))
 
 struct _XpEditorSelectionPrivate
 {
@@ -207,7 +205,7 @@ static void xp_editor_selection_class_init (XpEditorSelectionClass *klass)
 
 static void xp_editor_selection_init (XpEditorSelection *selection)
 {
-	selection->priv = XP_EDITOR_SELECTION_GET_PRIVATE (selection);
+	//selection->priv = XP_EDITOR_SELECTION_GET_PRIVATE (selection);
 }
 
 XpEditorSelection * xp_editor_selection_new (WebKitWebView *parent_view)
@@ -215,7 +213,7 @@ XpEditorSelection * xp_editor_selection_new (WebKitWebView *parent_view)
 	g_return_val_if_fail (WEBKIT_IS_WEB_VIEW (parent_view), NULL);
 
 	return g_object_new (
-			XP_TYPXP_EDITOR_SELECTION,
+			XP_TYPE_EDITOR_SELECTION,
 			"webview", parent_view, NULL);
 }
 

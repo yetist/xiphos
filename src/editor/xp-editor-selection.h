@@ -37,6 +37,7 @@ G_BEGIN_DECLS
 
 typedef struct _XpEditorSelection             XpEditorSelection;
 typedef struct _XpEditorSelectionClass        XpEditorSelectionClass;
+typedef struct _XpEditorSelectionPrivate      XpEditorSelectionPrivate;
 
 struct _XpEditorSelection
 {

@@ -47,6 +47,7 @@ endif ()
 # select WebkitGtk
 if (NOT WEBKIT1)
   set (USE_WEBKIT2 ON)
+  set (USE_WEBKIT2_EDITOR ON)
 endif ()
 
 # enable dBus

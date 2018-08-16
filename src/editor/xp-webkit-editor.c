@@ -21,8 +21,11 @@
  * */
 
 #include <JavaScriptCore/JavaScript.h>
+#include <glib-object.h>
 #include "xp-webkit-editor.h"
 #include "xp-editor-selection.h"
+
+#define DATADIR "tmp"
 
 /* Signals */
 enum {
@@ -36,6 +39,14 @@ enum {
 	PROP_0,
 	PROP_NOTE,
 	NUM_PROP
+};
+
+enum {
+	PROP_BOLD,
+	PROP_ITALIC,
+	PROP_STRIKE,
+	XP_BULLET_LIST,
+	XP_ORDER_LIST,
 };
 
 /* Block Format */
@@ -55,11 +66,10 @@ G_DEFINE_TYPE (XpWebkitEditor, xp_webkit_editor, WEBKIT_TYPE_WEB_VIEW);
 
 typedef gboolean GetFormatFunc (XpEditorSelection*);
 typedef void     SetFormatFunc (XpEditorSelection*, gboolean);
-typedef struct _XpWebkitEditorPrivate        XpWebkitEditorPrivate;
 
 struct _XpWebkitEditorPrivate
 {
-	XpNoteObj *note;
+	//XpNoteObj *note;
 	gulong content_changed;
 	gulong color_changed;
 	gboolean has_text;
@@ -78,7 +88,6 @@ static void xp_webkit_editor_get_property  (GObject          *object,
 		GValue           *value,
 		GParamSpec       *pspec);
 
-G_DEFINE_TYPE (XpWebkitEditor, xp_webkit_editor, WEBKIT_TYPE_WEB);
 
 /////////////////////////////
 
@@ -157,19 +166,19 @@ void xp_webkit_editor_apply_format (XpWebkitEditor *self, gint format)
 	{
 		switch (format)
 		{
-			case XP_BOLD:
-				xp_toggle_format (priv->sel, e_editor_selection_get_bold,
-						e_editor_selection_set_bold);
+			case PROP_BOLD:
+				xp_toggle_format (priv->sel, xp_editor_selection_get_bold,
+						xp_editor_selection_set_bold);
 				break;
 
-			case XP_ITALIC:
-				xp_toggle_format (priv->sel, e_editor_selection_get_italic,
-						e_editor_selection_set_italic);
+			case PROP_ITALIC:
+				xp_toggle_format (priv->sel, xp_editor_selection_get_italic,
+						xp_editor_selection_set_italic);
 				break;
 
-			case XP_STRIKE:
-				xp_toggle_format (priv->sel, e_editor_selection_get_strike_through,
-						e_editor_selection_set_strike_through);
+			case PROP_STRIKE:
+				xp_toggle_format (priv->sel, xp_editor_selection_get_strike_through,
+						xp_editor_selection_set_strike_through);
 				break;
 
 			case XP_BULLET_LIST:
@@ -254,11 +263,11 @@ void xp_webkit_editor_set_font (XpWebkitEditor *self, gchar *font)
 	pango_font_description_free (font_desc);
 }
 
-static void xp_webkit_editor_init (XpWebkitEditor *webkit_editor)
+static void xp_webkit_editor_init (XpWebkitEditor *self)
 {
-	XpWebkitEditorPrivate *priv;
+	//XpWebkitEditorPrivate *priv;
 
-	self->priv = XP_WEBKIT_EDITOR_GET_PRIVATE (webkit_editor);
+	//self->priv = XP_WEBKIT_EDITOR_GET_PRIVATE (self);
 
 }
 
@@ -269,21 +278,23 @@ static void xp_webkit_editor_finalize (GObject *object)
 
 	g_free (priv->selected_text);
 
-	if (priv->note != NULL) {
-		g_object_remove_weak_pointer (G_OBJECT (priv->note), (gpointer*) &priv->note);
-		g_signal_handler_disconnect (priv->note, priv->color_changed);
-	}
+//	if (priv->note != NULL) {
+//		g_object_remove_weak_pointer (G_OBJECT (priv->note), (gpointer*) &priv->note);
+//		g_signal_handler_disconnect (priv->note, priv->color_changed);
+//	}
 
 	G_OBJECT_CLASS (xp_webkit_editor_parent_class)->finalize (object);
 }
 
 static void xp_webkit_editor_content_changed (XpWebkitEditor *self, const char *html, const char *text)
 {
-	XpNoteObj *note = self->priv->note;
+	//XpNoteObj *note = self->priv->note;
 	gchar **rows;
 
-	xp_note_obj_set_html (note, (char *)html);
-	xp_note_obj_set_raw_text (note, (char *)text);
+	//xp_note_obj_set_html (note, (char *)html);
+	//xp_note_obj_set_raw_text (note, (char *)text);
+	g_print("html:\n%s\n", html);
+	g_print("text:\n%s\n", html);
 
 	g_signal_emit (self, xp_editor_signals[CONTENT_CHANGED], 0, NULL);
 
@@ -298,22 +309,24 @@ static void xp_webkit_editor_content_changed (XpWebkitEditor *self, const char *
 
 		title = rows[0];
 
-		if (g_strcmp0 (title, xp_item_get_title (XP_ITEM (note))) != 0)
-		{
-			unique_title = xp_manager_get_unique_title (xp_item_get_manager (XP_ITEM (note)),
-					title);
+		g_print("title=%s\n", title);
+		//if (g_strcmp0 (title, xp_item_get_title (XP_ITEM (note))) != 0)
+		//{
+		//	unique_title = xp_manager_get_unique_title (xp_item_get_manager (XP_ITEM (note)),
+		//			title);
 
-			xp_note_obj_set_title (note, unique_title);
-		}
+		//	xp_note_obj_set_title (note, unique_title);
+		//}
 	}
 
 	g_strfreev (rows);
 
-	xp_note_obj_set_mtime (note, g_get_real_time () / G_USEC_PER_SEC);
-	xp_note_obj_save_note (note);
+	//xp_note_obj_set_mtime (note, g_get_real_time () / G_USEC_PER_SEC);
+	//xp_note_obj_save_note (note);
 }
 
 
+#if 0
 static void on_note_color_changed (XpNoteObj *note, XpWebkitEditor *self)
 {
 	GdkRGBA color;
@@ -321,6 +334,7 @@ static void on_note_color_changed (XpNoteObj *note, XpWebkitEditor *self)
 	if (xp_note_obj_get_rgba(note,&color))
 		set_editor_color (WEBKIT_WEB_VIEW (self), &color);
 }
+#endif
 
 static gboolean on_navigation_request (WebKitWebView *web_view, WebKitPolicyDecision *decision, WebKitPolicyDecisionType decision_type, gpointer user_data)
 {
@@ -367,17 +381,17 @@ static void on_load_change (WebKitWebView  *web_view, WebKitLoadEvent event)
 
 	priv = XP_WEBKIT_EDITOR (web_view)->priv;
 
-	/* Apply color */
-	if (xp_note_obj_get_rgba (priv->note, &color))
-		set_editor_color (web_view, &color);
+	///* Apply color */
+	//if (xp_note_obj_get_rgba (priv->note, &color))
+	//	set_editor_color (web_view, &color);
 
-	if (!priv->color_changed)
-	{
-		priv->color_changed = g_signal_connect (priv->note,
-				"color-changed",
-				G_CALLBACK (on_note_color_changed),
-				web_view);
-	}
+	//if (!priv->color_changed)
+	//{
+	//	priv->color_changed = g_signal_connect (priv->note,
+	//			"color-changed",
+	//			G_CALLBACK (on_note_color_changed),
+	//			web_view);
+	//}
 }
 
 static char * get_js_property_string (JSGlobalContextRef js_context, JSObjectRef js_object, const char *property_name)
@@ -511,18 +525,19 @@ static void xp_webkit_editor_constructed (GObject *obj)
 	g_signal_connect (user_content, "script-message-received::xiphos",
 			G_CALLBACK (on_script_message), self);
 
-	priv->sel = e_editor_selection_new (view);
+	priv->sel = xp_editor_selection_new (view);
 
 	webkit_web_view_set_editable (view, TRUE);
 
 	/* Do not segfault at finalize
 	 * if the note died */
-	g_object_add_weak_pointer (G_OBJECT (priv->note), (gpointer*) &priv->note);
+	//g_object_add_weak_pointer (G_OBJECT (priv->note), (gpointer*) &priv->note);
 
-	body = xp_note_obj_get_html (priv->note);
+	//body = xp_note_obj_get_html (priv->note);
 
-	if (!body)
-		body = html_from_plain_text ("");
+	//if (!body)
+	//	body = html_from_plain_text ("");
+	body = "";
 
 	html_data = g_bytes_new_take (body, strlen (body));
 	webkit_web_view_load_bytes (view, html_data, "application/xhtml+xml", NULL,
@@ -543,9 +558,9 @@ static void xp_webkit_editor_set_property (GObject *object, guint prop_id, const
 
 	switch (prop_id)
 	{
-		case PROP_NOTE:
-			webkit_editor->priv->note = g_value_get_object (value);
-			break;
+//		case PROP_NOTE:
+//			webkit_editor->priv->note = g_value_get_object (value);
+//			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -560,9 +575,9 @@ static void xp_webkit_editor_get_property (GObject *object, guint prop_id, GValu
 
 	switch (prop_id)
 	{
-		case PROP_NOTE:
-			g_value_set_object (value, webkit_editor->priv->note);
-			break;
+//		case PROP_NOTE:
+//			g_value_set_object (value, webkit_editor->priv->note);
+//			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -578,15 +593,15 @@ static void xp_webkit_editor_class_init (XpWebkitEditorClass *klass)
 	object_class->get_property = xp_webkit_editor_get_property;
 	object_class->set_property = xp_webkit_editor_set_property;
 
-	properties[PROP_NOTE] = g_param_spec_object ("note",
-			"Note",
-			"Xp Note Obj",
-			XP_TYPE_NOTE_OBJ,
-			G_PARAM_READWRITE  |
-			G_PARAM_CONSTRUCT |
-			G_PARAM_STATIC_STRINGS);
+//	properties[PROP_NOTE] = g_param_spec_object ("note",
+//			"Note",
+//			"Xp Note Obj",
+//			XP_TYPE_NOTE_OBJ,
+//			G_PARAM_READWRITE  |
+//			G_PARAM_CONSTRUCT |
+//			G_PARAM_STATIC_STRINGS);
 
-	g_object_class_install_property (object_class,PROP_NOTE,properties[PROP_NOTE]);
+	g_object_class_install_property (object_class, PROP_NOTE, properties[PROP_NOTE]);
 
 	xp_editor_signals[EDITOR_CLOSED] = g_signal_new ("closed",
 			G_OBJECT_CLASS_TYPE (klass),
@@ -610,7 +625,8 @@ static void xp_webkit_editor_class_init (XpWebkitEditorClass *klass)
 	g_type_class_add_private (klass, sizeof (XpWebkitEditorPrivate));
 }
 
-XpWebkitEditor * xp_webkit_editor_new (XpNoteObj *note)
+//XpWebkitEditor * xp_webkit_editor_new (XpNoteObj *note)
+XpWebkitEditor * xp_webkit_editor_new (void)
 {
 	return g_object_new (XP_TYPE_WEBKIT_EDITOR, NULL);
 	//WebKitUserContentManager *manager = webkit_user_content_manager_new ();

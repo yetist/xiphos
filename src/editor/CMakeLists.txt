@@ -29,6 +29,12 @@ if (USE_WEBKIT_EDITOR)
     editor.c
     webkit_editor.c
     )
+elseif (USE_WEBKIT2_EDITOR)
+  target_sources(editor
+    PRIVATE
+    editor2.c
+    webkit2_editor.c
+    )
 else ()
   target_sources(editor
     PRIVATE

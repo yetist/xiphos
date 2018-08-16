@@ -37,6 +37,7 @@ G_BEGIN_DECLS
 
 typedef struct _XpWebkitEditor             XpWebkitEditor;
 typedef struct _XpWebkitEditorClass        XpWebkitEditorClass;
+typedef struct _XpWebkitEditorPrivate      XpWebkitEditorPrivate;
 
 struct _XpWebkitEditor
 {

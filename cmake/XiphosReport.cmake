@@ -43,7 +43,7 @@ endif ()
 
 if (GTKHTML)
   message(STATUS "  Editor                       Gtkhtml")
-else ()
+elseif (!WEBKIT1)
   message(STATUS "  Editor                       WebKit-editor")
 endif ()
 message(STATUS "  D-Bus                        ${DBUS}")
