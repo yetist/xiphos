@@ -41,6 +41,7 @@ void                xp_webkit_editor_copy               (XpWebkitEditor *self);
 void                xp_webkit_editor_paste              (XpWebkitEditor *self);
 void                xp_webkit_editor_undo               (XpWebkitEditor *self);
 void                xp_webkit_editor_redo               (XpWebkitEditor *self);
+void                xp_webkit_editor_exec_command       (XpWebkitEditor *self, const gchar* command, const gchar* argument);
 void                xp_webkit_editor_set_font           (XpWebkitEditor *self, gchar *font);
 
 G_END_DECLS

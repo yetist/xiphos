@@ -170,8 +170,8 @@ gint editor_insert_new_outline_level(gint level, EDITOR *e)
 
 void editor_get_document_content(GString *data, EDITOR *e)
 {
-	const gchar* content = xp_webkit_editor_get_selection (e->html_widget);
-	g_print("content:\n%s\n", content);
+	const gchar* text = xp_webkit_editor_get_selection (XP_WEBKIT_EDITOR(e->html_widget));
+	g_print("get document content:\n%s\n", text);
 #if 0
 	WebKitDOMHTMLElement *html;
 	WebKitDOMHTMLHeadElement *header;
@@ -217,7 +217,8 @@ void editor_get_document_content(GString *data, EDITOR *e)
 
 gchar *editor_get_selected_text(EDITOR *e)
 {
-	const gchar* text = xp_webkit_editor_get_selection (e->html_widget);
+	const gchar* text = xp_webkit_editor_get_selection (XP_WEBKIT_EDITOR(e->html_widget));
+	g_message("selected text:%s", text);
 	return g_strdup(text);
 #if 0
 	WebKitDOMDocument *dom_document;
@@ -360,10 +361,13 @@ void editor_execute_script(gchar *script, EDITOR *e)
 
 void editor_insert_html(const gchar *html, EDITOR *e)
 {
+	xp_webkit_editor_exec_command (e->html_widget, "insertHTML", html);
+	/*
 	gchar *str = g_strdup_printf("document.execCommand('insertHTML', null, \'%s\');", html);
 	XI_message(("script: %s", str));
 	editor_execute_script(str, e);
 	g_free(str);
+	*/
 }
 
 /*

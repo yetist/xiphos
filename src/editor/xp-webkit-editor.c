@@ -222,6 +222,15 @@ void xp_webkit_editor_redo (XpWebkitEditor *self)
 	webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (self), WEBKIT_EDITING_COMMAND_REDO);
 }
 
+void xp_webkit_editor_exec_command (XpWebkitEditor *self, const gchar* command, const gchar* argument)
+{
+	if (argument == NULL) {
+		webkit_web_view_execute_editing_command (self, command);
+	} else {
+		webkit_web_view_execute_editing_command_with_argument(self, command, argument);
+	}
+}
+
 static void set_editor_color (WebKitWebView *w, GdkRGBA *col)
 {
 	g_autofree gchar *script = NULL;
@@ -540,7 +549,7 @@ static void xp_webkit_editor_constructed (GObject *obj)
 	//body = "<h1>hi</h1>";
 	body = g_strconcat ("<html xmlns=\"http://www.w3.org/1999/xhtml\">",
 			"<head>",
-			"<link rel='stylesheet' href='Default.css' type='text/css'/>",
+			//"<link rel='stylesheet' href='Default.css' type='text/css'/>",
 			"<script language='javascript' src='xiphos.js'></script>"
 			"</head>",
 			"<body contenteditable='true' id='editable'>",

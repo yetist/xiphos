@@ -53,6 +53,7 @@
 #include "gui/xiphos.h"
 #include "gui/treekey-editor.h"
 #include "gui/utilities.h"
+#include "xp-webkit-editor.h"
 
 #include "gui/debug_glib_null.h"
 //TOOL_ITEMS toolitems;
@@ -472,6 +473,7 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 #else
 		const gchar *fontname = gtk_font_selection_dialog_get_font_name((GtkFontSelectionDialog *)dialog);
 #endif
+		g_message("fontname::::%s", fontname);
 		GString *name = g_string_new(fontname);
 		size = get_font_size_from_name(name);
 		g_string_free(name, TRUE);
@@ -488,11 +490,14 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 		fontname = pango_font_description_get_family(font_description);
 #endif
 
+		g_message("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>", fontname, size, selected_text);
 		gchar *script = g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>",
 						fontname, size, selected_text);
 
-		//editor_insert_html(script, e);
-		xp_webkit_editor_set_font (e->html_widget, fontname);
+		//xp_webkit_editor_exec_command (XP_WEBKIT_EDITOR(e->html_widget), "fontName", fontname);
+		//xp_webkit_editor_exec_command (XP_WEBKIT_EDITOR(e->html_widget), "fontSize", size);
+		editor_insert_html(script, e);
+		//xp_webkit_editor_set_font (e->html_widget, fontname);
 		g_free(script);
 	}
 	if (size)
