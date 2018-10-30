@@ -226,8 +226,10 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(hbuttonbox2);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area23), hbuttonbox2,
 			   TRUE, TRUE, 0);
+	g_message("ooooooooo\n");
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox2),
 				  GTK_BUTTONBOX_END);
+	g_message("ooooooooo\n");
 
 	button_close =
 #if GTK_CHECK_VERSION(3, 10, 0)

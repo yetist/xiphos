@@ -28,6 +28,8 @@ if (USE_WEBKIT_EDITOR)
     PRIVATE
     editor.c
     webkit_editor.c
+    xp-editor-selection.c
+    xp-webkit-editor.c
     )
 else ()
   target_sources(editor

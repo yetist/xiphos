@@ -250,6 +250,7 @@ static void on_edit_percomm_activate(GtkMenuItem *menuitem,
 {
 	gchar *key;
 
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	if (is_dialog)
 		key = g_strdup(dialog->key);
 	else

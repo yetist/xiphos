@@ -569,6 +569,7 @@ GtkWidget *main_versekey_drop_down_verse_menu(NAVBAR_VERSEKEY navbar,
 					      gpointer dialog,
 					      gpointer editor)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	gint i, x;
 	GtkWidget *menu;
 	GtkMenuShell *menu_shell;

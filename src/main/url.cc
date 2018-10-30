@@ -132,6 +132,7 @@ static void alert_url_not_found(const gchar *url)
 
 static gint show_studypad(const gchar *filename, gboolean clicked)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	editor_create_new(filename, NULL, STUDYPAD_EDITOR);
 	return 1;
 }

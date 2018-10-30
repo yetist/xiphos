@@ -630,11 +630,13 @@ static gboolean on_modules_list_button_release(GtkWidget *widget,
 		}
 		if (caption &&
 		    (!g_utf8_collate(caption, _("Prayer List/Journal")))) {
+			g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 			gui_menu_prayerlist_popup(NULL, NULL);
 			g_free(mod);
 			return FALSE;
 		}
 		if (mod && (main_get_mod_type(mod) == PRAYERLIST_TYPE)) {
+			g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 			buf_module = mod;
 #if GTK_CHECK_VERSION(3, 22, 0)
 			gtk_menu_popup_at_pointer(GTK_MENU(sidebar.menu_prayerlist_mod), NULL);
@@ -836,6 +838,7 @@ G_MODULE_EXPORT static void on_save_list_as_bookmarks_activate(GtkMenuItem * men
 G_MODULE_EXPORT void
 on_open_in_dialog_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	int mod_type = main_get_mod_type(buf_module);
 
 	if ((mod_type == PERCOM_TYPE) || (mod_type == PRAYERLIST_TYPE)) {
@@ -1084,6 +1087,7 @@ GtkWidget *create_results_menu(void)
  */
 static GtkWidget *create_menu_modules(void)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
 	GtkBuilder *gxml;
@@ -1165,6 +1169,7 @@ on_book_chapter_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 GtkWidget *create_menu_prayerlist(void)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	GtkWidget *menu;
 	gchar *glade_file;
 #ifdef USE_GTKBUILDER
@@ -1206,6 +1211,7 @@ GtkWidget *create_menu_prayerlist(void)
 
 void on_edit_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
+	g_message("iiiiiiii\n");
 	editor_create_new(buf_module, NULL, BOOK_EDITOR);
 }
 

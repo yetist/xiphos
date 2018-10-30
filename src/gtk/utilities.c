@@ -249,6 +249,7 @@ void gui_glade_signal_connect_func(const gchar *cb_name, GObject *obj,
 				   gpointer user_data)
 {
 	/** Module with all the symbols of the program */
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	static GModule *mod_self = NULL;
 	gpointer handler_func;
 

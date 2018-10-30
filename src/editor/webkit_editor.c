@@ -29,7 +29,7 @@
 #include <ctype.h>
 
 #include <glib.h>
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 #include <libintl.h>
 #include <locale.h>
@@ -227,15 +227,19 @@ action_justify_full_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_bold_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	if (buttons_state.nochange)
 		return;
 
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	editor_execute_script("document.execCommand('bold',false,false);", e);
+	xp_webkit_editor_apply_format (e->html_widget, 0);
 }
 
 G_MODULE_EXPORT void
 action_italic_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	xp_webkit_editor_apply_format (e->html_widget, 1);
 	//extern BUTTONS_STATE buttons_state;
 	if (buttons_state.nochange)
 		return;
@@ -246,18 +250,21 @@ action_italic_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_undo_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	xp_webkit_editor_undo (e->html_widget);
 	editor_execute_script("document.execCommand('undo',false,false);", e);
 }
 
 G_MODULE_EXPORT void
 action_redo_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	xp_webkit_editor_redo (e->html_widget);
 	editor_execute_script("document.execCommand('redo',false,false);", e);
 }
 
 G_MODULE_EXPORT void
 action_underline_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	xp_webkit_editor_apply_format (e->html_widget, 2);
 	//extern BUTTONS_STATE buttons_state;
 	if (buttons_state.nochange)
 		return;
@@ -268,6 +275,7 @@ action_underline_activate_cb(GtkWidget *widget, EDITOR *e)
 G_MODULE_EXPORT void
 action_strikethrough_activate_cb(GtkWidget *widget, EDITOR *e)
 {
+	xp_webkit_editor_apply_format (e->html_widget, 3);
 	//extern BUTTONS_STATE buttons_state;
 	if (buttons_state.nochange)
 		return;
@@ -327,11 +335,13 @@ action_delete_item_activate_cb(GtkWidget *widget, EDITOR *e)
 		g_free(fname);
 
 		if (text && strlen(text)) {
+#if 0
 			webkit_web_view_load_string((WebKitWebView *)
 						    e->html_widget,
 						    text,
 						    "text/html", "utf_8",
 						    "file://");
+#endif
 		}
 		if (text)
 			g_free(text);
@@ -481,7 +491,8 @@ action_font_activate_cb(GtkWidget *widget, EDITOR *e)
 		gchar *script = g_strdup_printf("<SPAN STYLE=\"font-family:%s;font-size:%spx;\">%s</SPAN>",
 						fontname, size, selected_text);
 
-		editor_insert_html(script, e);
+		//editor_insert_html(script, e);
+		xp_webkit_editor_set_font (e->html_widget, fontname);
 		g_free(script);
 	}
 	if (size)
@@ -584,6 +595,7 @@ print(WebKitWebView *html, GtkPrintOperationAction action)
 	GtkPrintOperation *operation;
 	GtkPrintOperationResult result;
 	GError *error = NULL;
+#if 0
 	WebKitWebFrame *frame;
 
 	frame = webkit_web_view_get_main_frame(html);
@@ -594,6 +606,7 @@ print(WebKitWebView *html, GtkPrintOperationAction action)
 	g_object_unref(operation);
 	handle_error(&error);
 
+#endif
 	return result;
 }
 
@@ -811,11 +824,13 @@ static GtkWidget *editor_new(const gchar *title, EDITOR *e)
 	    FALSE);
 	builder = gtk_builder_new();
 
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	if (!gtk_builder_add_from_file(builder, gbuilder_file, &error)) {
 		g_warning("Couldn't load builder file: %s",
 			  error->message);
 		g_error_free(error);
 	}
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 
 	window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
 	e->window = window;
@@ -974,8 +989,10 @@ static void _load_file(EDITOR *e, const gchar *filename)
 					 : filename);
 
 	XI_message(("web view load string [%s]", text));
+#if 0
 	webkit_web_view_load_string(WEBKIT_WEB_VIEW(e->html_widget),
 				    text, "text/html", "utf_8", "file://");
+#endif
 
 	g_free(text);
 	e->is_changed = FALSE;
@@ -1019,11 +1036,13 @@ void editor_load_book(EDITOR *e)
 	}
 
 	if (text && strlen(text)) {
+#if 0
 		webkit_web_view_load_string((WebKitWebView *)
 					    e->html_widget,
 					    text,
 					    "text/html", "utf_8",
 					    "file://");
+#endif
 	}
 
 	if (text)
@@ -1107,11 +1126,13 @@ editor_load_note(EDITOR *e, const gchar *module_name, const gchar *key)
 	}
 
 	if (text && strlen(text)) {
+#if 0
 		webkit_web_view_load_string((WebKitWebView *)
 					    e->html_widget,
 					    text,
 					    "text/html", "utf_8",
 					    "file://");
+#endif
 	}
 
 	e->is_changed = FALSE;
@@ -1236,6 +1257,7 @@ gint ask_about_saving(EDITOR *e)
 static gint _create_new(const gchar *filename, const gchar *key,
 			gint editor_type)
 {
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 	EDITOR *editor;
 	GtkWidget *toolbar_nav = NULL;
 
@@ -1350,6 +1372,8 @@ gint editor_create_new(const gchar *filename, const gchar *key,
 {
 	GList *tmp = NULL;
 
+	g_message("call here\n");
+	printf("call here:%d, %s, %d\n", __LINE__, __FILE__, __FUNCTION__);
 	tmp = g_list_first(editors_all);
 	while (tmp != NULL) {
 		EDITOR *e = (EDITOR *)tmp->data;

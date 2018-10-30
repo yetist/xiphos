@@ -931,6 +931,7 @@ on_module_manager_activate(GtkMenuItem *menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_open_studypad_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
+	printf("xxxxxxxxxxxxxxxxx\n");
 	editor_create_new(settings.studypadfilename, NULL, FALSE);
 	//create_window ();
 }

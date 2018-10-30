@@ -32,10 +32,11 @@
 #include <X11/keysymdef.h>
 
 #include <gtk/gtk.h>
-#include <webkit/webkit.h>
+#include <webkit2/webkit2.h>
 
 #include "editor/webkit_editor.h"
 #include "editor/editor.h"
+#include "editor/xp-webkit-editor.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -73,6 +74,7 @@ glong mouse_y;
 
 gint editor_insert_new_outline_level(gint level, EDITOR *e)
 {
+#if 0
 	WebKitDOMDocument *doc;
 	WebKitDOMElement *element_anchor = NULL;
 	WebKitDOMElement *element = NULL;
@@ -146,6 +148,7 @@ gint editor_insert_new_outline_level(gint level, EDITOR *e)
 		return 0;
 	}
 
+#endif
 	return 1;
 }
 
@@ -167,6 +170,9 @@ gint editor_insert_new_outline_level(gint level, EDITOR *e)
 
 void editor_get_document_content(GString *data, EDITOR *e)
 {
+	const gchar* content = xp_webkit_editor_get_selection (e->html_widget);
+	g_print("content:\n%s\n", content);
+#if 0
 	WebKitDOMHTMLElement *html;
 	WebKitDOMHTMLHeadElement *header;
 	WebKitDOMDocument *dom_document = NULL;
@@ -190,6 +196,7 @@ void editor_get_document_content(GString *data, EDITOR *e)
 
 	g_string_printf(data, "%s%s</head><body>%s</body>\n</html>",
 			html_start, head, body);
+#endif
 }
 
 /******************************************************************************
@@ -210,6 +217,9 @@ void editor_get_document_content(GString *data, EDITOR *e)
 
 gchar *editor_get_selected_text(EDITOR *e)
 {
+	const gchar* text = xp_webkit_editor_get_selection (e->html_widget);
+	return g_strdup(text);
+#if 0
 	WebKitDOMDocument *dom_document;
 	WebKitDOMDOMWindow *window = NULL;
 	WebKitDOMDOMSelection *selection = NULL;
@@ -243,6 +253,7 @@ gchar *editor_get_selected_text(EDITOR *e)
 		}
 	}
 	return g_strdup(text);
+#endif
 }
 
 /******************************************************************************
@@ -263,8 +274,10 @@ gchar *editor_get_selected_text(EDITOR *e)
 
 void editor_find_string(gchar *needle, EDITOR *e)
 {
+#if 0
 	webkit_web_view_search_text((WebKitWebView *)e->html_widget,
 				    needle, FALSE, TRUE, TRUE);
+#endif
 }
 
 /******************************************************************************
@@ -287,6 +300,7 @@ void editor_find_string(gchar *needle, EDITOR *e)
 void editor_replace_string(gchar *old_string, gchar *new_string,
 			   EDITOR *e)
 {
+#if 0
 	WebKitWebFrame *frame = NULL;
 
 	frame = webkit_web_view_get_main_frame((WebKitWebView *)
@@ -294,6 +308,7 @@ void editor_replace_string(gchar *old_string, gchar *new_string,
 	webkit_web_view_search_text((WebKitWebView *)e->html_widget,
 				    old_string, FALSE, TRUE, FALSE);
 	webkit_web_frame_replace_selection(frame, new_string);
+#endif
 }
 
 /******************************************************************************
@@ -316,9 +331,15 @@ void editor_replace_string(gchar *old_string, gchar *new_string,
 void editor_execute_script(gchar *script, EDITOR *e)
 {
 	if (script) {
+		webkit_web_view_execute_editing_command (WEBKIT_WEB_VIEW (e->html_widget), script);
+		XI_message(("script: %s", script));
+	}
+#if 0
+	if (script) {
 		webkit_web_view_execute_script(WEBKIT_WEB_VIEW(e->html_widget), script);
 		XI_message(("script: %s", script));
 	}
+#endif
 }
 
 /******************************************************************************
@@ -355,29 +376,20 @@ void editor_open_recent (const gchar * uri, EDITOR * e)
 
 gboolean editor_cut(EDITOR *e)
 {
-	if (webkit_web_view_can_cut_clipboard(WEBKIT_WEB_VIEW(e->html_widget))) {
-		webkit_web_view_cut_clipboard(WEBKIT_WEB_VIEW(e->html_widget));
-		return 1;
-	} else
-		return 0;
+	xp_webkit_editor_cut (XP_WEBKIT_EDITOR(e->html_widget));
+	return TRUE;
 }
 
 gboolean editor_copy(EDITOR *e)
 {
-	if (webkit_web_view_can_copy_clipboard(WEBKIT_WEB_VIEW(e->html_widget))) {
-		webkit_web_view_copy_clipboard(WEBKIT_WEB_VIEW(e->html_widget));
-		return 1;
-	} else
-		return 0;
+	xp_webkit_editor_copy (XP_WEBKIT_EDITOR(e->html_widget));
+	return TRUE;
 }
 
 gboolean editor_paste(EDITOR *e)
 {
-	if (webkit_web_view_can_paste_clipboard(WEBKIT_WEB_VIEW(e->html_widget))) {
-		webkit_web_view_paste_clipboard(WEBKIT_WEB_VIEW(e->html_widget));
-		return 1;
-	} else
-		return 0;
+	xp_webkit_editor_paste (XP_WEBKIT_EDITOR(e->html_widget));
+	return TRUE;
 }
 
 /*
@@ -523,6 +535,7 @@ static void user_changed_contents_cb(WebKitWebView *web_view, EDITOR *e)
  * Return value
  *   WebKitNavigationResponse
  */
+#if 0
 static WebKitNavigationResponse on_navigation_requested(WebKitWebView *web_view,
 							WebKitWebFrame *frame,
 							WebKitNetworkRequest *
@@ -542,6 +555,7 @@ static WebKitNavigationResponse on_navigation_requested(WebKitWebView *web_view,
 	else
 		return TRUE;
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -720,6 +734,7 @@ static gboolean key_handler(GtkWidget *widget, GdkEventKey *event, EDITOR *e)
 
 static void menu_spell_item_activated(GtkWidget *menuitem, EDITOR *e)
 {
+#if 0
 	WebKitWebFrame *frame;
 	const gchar *label;
 
@@ -728,6 +743,7 @@ static void menu_spell_item_activated(GtkWidget *menuitem, EDITOR *e)
 					       e->html_widget);
 
 	webkit_web_frame_replace_selection(frame, label);
+#endif
 }
 
 /******************************************************************************
@@ -749,12 +765,14 @@ static void menu_spell_item_activated(GtkWidget *menuitem, EDITOR *e)
 static void menu_spell_add_item_activated(GtkWidget *menuitem,
 					  gpointer user_data)
 {
+#if 0
 	WebKitSpellChecker *checker = NULL;
 	checker = (WebKitSpellChecker *)webkit_get_text_checker();
 
 	webkit_spell_checker_learn_word(checker, (gchar *)user_data);
 	if ((gchar *)user_data)
 		g_free((gchar *)user_data);
+#endif
 }
 
 /******************************************************************************
@@ -776,12 +794,14 @@ static void menu_spell_add_item_activated(GtkWidget *menuitem,
 static void menu_spell_ignore_item_activated(GtkWidget *menuitem,
 					     gpointer user_data)
 {
+#if 0
 	WebKitSpellChecker *checker = NULL;
 	checker = (WebKitSpellChecker *)webkit_get_text_checker();
 
 	webkit_spell_checker_ignore_word(checker, (gchar *)user_data);
 	if ((gchar *)user_data)
 		g_free((gchar *)user_data);
+#endif
 }
 
 /******************************************************************************
@@ -803,6 +823,7 @@ static void menu_spell_ignore_item_activated(GtkWidget *menuitem,
 
 static gint _fill_spell_menu(GtkWidget *menu, gchar *word, EDITOR *e)
 {
+#if 0
 	WebKitSpellChecker *checker = NULL;
 	int misspelling_location;
 	int misspelling_length;
@@ -865,6 +886,8 @@ static gint _fill_spell_menu(GtkWidget *menu, gchar *word, EDITOR *e)
 		g_strfreev(word_list);
 
 	return misspelling_length;
+#endif
+	return 0;
 }
 
 /******************************************************************************
@@ -883,6 +906,7 @@ static gint _fill_spell_menu(GtkWidget *menu, gchar *word, EDITOR *e)
  *   void
  */
 
+#if 0
 static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 				 EDITOR *e)
 {
@@ -984,6 +1008,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 	gtk_menu_popup((GtkMenu *)menu, NULL, NULL, NULL, NULL, 3, time);
 #endif
 }
+#endif
 
 /******************************************************************************
  * Name
@@ -1006,6 +1031,7 @@ static void _create_context_menu(WebKitDOMDocument *dom_document, guint32 time,
 
 static gboolean button_handler(GtkWidget *widget, GdkEvent *event, EDITOR *e)
 {
+#if 0
 	WebKitDOMDocument *dom_document;
 	WebKitDOMElement *element = NULL;
 	buttons_state.bold = 0;
@@ -1088,6 +1114,7 @@ static gboolean button_handler(GtkWidget *widget, GdkEvent *event, EDITOR *e)
 	}
 	set_button_state(buttons_state, e);
 	buttons_state.nochange = 0;
+#endif
 	return 0;
 }
 
@@ -1109,6 +1136,25 @@ static gboolean button_handler(GtkWidget *widget, GdkEvent *event, EDITOR *e)
 
 void create_editor_window(GtkWidget *scrollwindow, EDITOR *e)
 {
+#if 1
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
+	gchar *text = NULL, *fname = NULL;
+	//XpWebkitEditor* editor;
+	//editor = xp_webkit_editor_new ();
+	/* new empty document from template */
+	fname = g_build_filename(settings.gSwordDir, "studypad.spt", NULL);
+	XI_message(("action delete item [%s]", fname));
+	text = inhale_text_from_file(fname);
+	g_free(fname);
+
+	if (text && strlen(text)) {
+		printf("text:%s\n", text);
+	}
+	XpWebkitEditor* webeditor = xp_webkit_editor_new ();
+	gtk_widget_show(GTK_WIDGET(webeditor));
+	e->html_widget = webeditor;
+	gtk_container_add(GTK_CONTAINER(scrollwindow), GTK_WIDGET(webeditor));
+#else
 	WebKitWebSettings *setting;
 	GtkWidget *webview;
 	gchar *text = NULL, *fname = NULL;
@@ -1158,6 +1204,7 @@ void create_editor_window(GtkWidget *scrollwindow, EDITOR *e)
 			 G_CALLBACK(button_handler), e);
 	g_signal_connect(G_OBJECT(webview), "key-press-event",
 			 G_CALLBACK(key_handler), e);
+#endif
 }
 
 #endif /* USE_WEBKIT_EDITOR */

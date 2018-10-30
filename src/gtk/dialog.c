@@ -622,8 +622,10 @@ static GtkWidget *create_dialog_request(GS_DIALOG *info)
 	    gtk_dialog_get_action_area(GTK_DIALOG(dialog_request));
 #endif
 	gtk_widget_show(dialog_action_area3);
+#if !GTK_CHECK_VERSION(3, 12, 0)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
 				  GTK_BUTTONBOX_END);
+#endif
 #if GTK_CHECK_VERSION(3, 10, 0)
 	if (info->no)
 		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
@@ -790,7 +792,9 @@ gint gui_gs_dialog(GS_DIALOG *info)
 		is_running = TRUE;
 		gtk_dialog_run((GtkDialog *)dialog);
 		is_running = FALSE;
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 		gtk_widget_destroy(dialog);
+	g_message("DEBUG: %s %d:%s()", __FILE__, __LINE__, __FUNCTION__);
 		return retval;
 	}
 	return 4;
