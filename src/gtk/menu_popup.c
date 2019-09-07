@@ -256,8 +256,6 @@ static void on_edit_percomm_activate(GtkMenuItem *menuitem,
 		key = _get_key(menu_mod_name);
 	if (key) {
 		XI_message(("\n\npercomm key: %s\n\n", key));
-		editor_create_new((gchar *)user_data, (gchar *)key,
-				  NOTE_EDITOR);
 		g_free(key);
 	}
 }
@@ -282,8 +280,6 @@ static void on_edit_prayerlist_activate(GtkMenuItem *menuitem,
 					gpointer user_data)
 {
 	XI_message(("settings.book_key: %s", (char *)(is_dialog ? dialog->key : settings.book_key)));
-	editor_create_new((gchar *)user_data,
-			  (gchar *)(is_dialog ? dialog->key : settings.book_key), BOOK_EDITOR);
 }
 
 /******************************************************************************

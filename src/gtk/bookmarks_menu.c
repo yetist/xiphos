@@ -294,7 +294,6 @@ G_MODULE_EXPORT void on_dialog_activate(GtkMenuItem *menuitem,
 				   &selected, 3, &key, 4, &module, -1);
 
 		if (module && (main_get_mod_type(module) == PERCOM_TYPE)) {
-			editor_create_new(module, key, TRUE);
 			use_dialog = FALSE;
 			g_free(module);
 			g_free(key);

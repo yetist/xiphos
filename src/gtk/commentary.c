@@ -82,9 +82,6 @@ void access_to_edit_percomm()
 	gchar *personal = "Personal";
 	if (!main_is_module(personal))
 		return;
-
-	editor_create_new(personal, (gchar *)settings.currentverse,
-			  NOTE_EDITOR);
 }
 
 static gboolean on_enter_notify_event(GtkWidget *widget,

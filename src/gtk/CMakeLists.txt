@@ -208,7 +208,6 @@ target_link_libraries(xiphos
   PkgConfig::Biblesync
   Xiphos::Main
   Xiphos::Backend
-  Xiphos::Editor
   Xiphos::Webkit
   Xiphos::Xiphos_html
   )

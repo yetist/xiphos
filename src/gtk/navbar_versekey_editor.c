@@ -448,8 +448,6 @@ static void on_entry_activate(GtkEntry *entry, EDITOR *editor)
 			    settings.MainWindowModule);
 	main_navbar_versekey_set(editor->navbar, gkey);
 
-	editor_load_note(editor, NULL, gkey);
-
 	if (url)
 		g_free(url);
 	if (gkey)
@@ -739,7 +737,6 @@ static void _sync_toggled(GtkToggleButton *button, EDITOR *e)
 {
 	if (gtk_toggle_button_get_active(button)) {
 		e->sync = TRUE;
-		editor_sync_with_main(); //sync_with_main(c);
 	} else
 		e->sync = FALSE;
 }

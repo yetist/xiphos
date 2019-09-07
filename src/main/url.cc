@@ -132,7 +132,6 @@ static void alert_url_not_found(const gchar *url)
 
 static gint show_studypad(const gchar *filename, gboolean clicked)
 {
-	editor_create_new(filename, NULL, STUDYPAD_EDITOR);
 	return 1;
 }
 
@@ -601,7 +600,6 @@ static int show_module_and_key(const char *module, const char *key,
 		}
 		if (!strcmp(stype, "newDialog")) {
 			if (module && (main_get_mod_type((gchar *)module) == PERCOM_TYPE)) {
-				editor_create_new(module, key, TRUE);
 				return 1;
 			}
 			main_dialog_goto_bookmark((gchar *)module,
@@ -795,8 +793,6 @@ gint sword_uri(const gchar *url, gboolean clicked)
 			if (settings.comm_showing)
 				main_display_commentary(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar *)key);
-			editor_sync_with_main();
-
 			if (key)
 				g_free((gchar *)key);
 			break;
@@ -836,8 +832,6 @@ gint sword_uri(const gchar *url, gboolean clicked)
 			main_display_commentary(NULL, key);
 			main_display_bible(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar *)key);
-
-			editor_sync_with_main();
 
 			if (key)
 				g_free((gchar *)key);

@@ -91,8 +91,6 @@ static void _button_one(EDITOR *e)
 {
 	INFO *info;
 
-	editor_save_book(e);
-
 	info = _get_info(e->treeview);
 
 	if (atol(info->offset) == 0)
@@ -107,7 +105,6 @@ static void _button_one(EDITOR *e)
 	if (e->key)
 		g_free(e->key);
 	e->key = g_strdup(info->offset);
-	editor_load_book(e);
 
 	g_free(info->book);
 	g_free(info->local_name);
@@ -160,7 +157,6 @@ on_add_sibling_activate(GtkMenuItem *menuitem, gpointer user_data)
 			if (e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
-			editor_load_book(e);
 			g_free(buf);
 		}
 	}
@@ -225,7 +221,6 @@ on_add_child_activate(GtkMenuItem *menuitem, gpointer user_data)
 			if (e->key)
 				g_free(e->key);
 			e->key = g_strdup(buf);
-			editor_load_book(e);
 			g_free(buf);
 		}
 	}

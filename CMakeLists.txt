@@ -84,7 +84,6 @@ include (XiphosConfig_h)
 # build xiphos
 add_subdirectory(win32)
 add_subdirectory(src/backend)
-add_subdirectory(src/editor)
 add_subdirectory(src/main)
 add_subdirectory(src/webkit)
 add_subdirectory(src/xiphos_html)

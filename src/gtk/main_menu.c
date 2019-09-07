@@ -585,9 +585,6 @@ on_quit_activate(GtkMenuItem *menuitem, gpointer user_data)
 	g_spawn_close_pid(dbus_pid);
 #endif
 
-	/* offer to save all editors remaining open */
-	editor_maybe_save_all();
-
 	shutdown_frontend();
 	/* shutdown the sword stuff */
 	main_shutdown_backend();
@@ -920,8 +917,6 @@ on_module_manager_activate(GtkMenuItem *menuitem, gpointer user_data)
 G_MODULE_EXPORT void
 on_open_studypad_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	editor_create_new(settings.studypadfilename, NULL, FALSE);
-	//create_window ();
 }
 
 G_MODULE_EXPORT void

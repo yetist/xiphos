@@ -845,14 +845,7 @@ on_open_in_dialog_activate(GtkMenuItem *menuitem, gpointer user_data)
 				    _("If no, it will open for display only."));
 
 		if (gui_yes_no_dialog(dialog_text, NULL)) {
-			if (mod_type == PERCOM_TYPE)
-				editor_create_new((gchar *)buf_module,
-						  (gchar *)
-						  settings.currentverse,
-						  NOTE_EDITOR);
-			else
-				editor_create_new((gchar *)buf_module,
-						  "0", BOOK_EDITOR);
+            ;
 		} else {
 			if (mod_type == PERCOM_TYPE)
 				main_dialogs_open(buf_module,
@@ -1206,7 +1199,6 @@ GtkWidget *create_menu_prayerlist(void)
 
 void on_edit_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	editor_create_new(buf_module, NULL, BOOK_EDITOR);
 }
 
 GtkWidget *create_menu_prayerlist_mod(void)
