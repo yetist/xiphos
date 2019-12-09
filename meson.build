@@ -106,7 +106,7 @@ webkit2gtk_dep = dependency('webkit2gtk-4.0', required: false)
 webkitgtk_dep = dependency('webkitgtk-3.0', required: false)
 gtkhtml_dep = dependency('gtkhtml-editor-4.0', required: false)
 if editor == 'auto'
-  if gtk_ver = '3'
+  if gtk_ver == '3'
     if webkit2gtk_dep.found()
       editor = 'webkit2gtk'
     elif webkitgtk_dep.found()
@@ -116,7 +116,7 @@ if editor == 'auto'
     else
       editor = 'disable'
     endif
-  elif gtk_ver = '2'
+  elif gtk_ver == '2'
     if webkitgtk_dep.found()
       editor = 'webkitgtk'
     elif gtkhtml_dep.found()
