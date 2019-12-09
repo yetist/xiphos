@@ -19,10 +19,16 @@ option('chatty',
   value : false,
   description: 'Enable lots of tracing (default:disabled)')
 
-option('webkit-editor',
-  type: 'boolean',
-  value : false,
-  description: 'Use webkit editor (default:disabled)')
+#option('webkit-editor',
+#  type: 'boolean',
+#  value : false,
+#  description: 'Use webkit editor (default:disabled)')
+
+option('editor',
+  type: 'combo',
+  choices: ['auto', 'gtkhtml', 'webkitgtk', 'webkit2gtk'],
+  value: 'auto',
+  description: 'Select editor [*"auto", "gtkhtml", "webkitgtk", "webkit2gtk"]')
 
 option('webkit2',
   type: 'boolean',

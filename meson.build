@@ -1,5 +1,5 @@
 project('xiphos', 'c', 'cpp',
-  version : '4.0.7',
+  version : '4.1.0',
   license : 'LGPLv2.1+',
   default_options : [
 	  'warning_level=1',
@@ -56,23 +56,6 @@ if host_machine.system() == 'windows'
   rootdir_win32 = 'C:\msys'
 endif
 
-gtk_ver = get_option('gtk')
-if gtk_ver == 'auto'
-  if dependency('gtk+-3.0').found()
-    gtk_ver = '3'
-  elif dependency('gtk+-2.0', version: '>= 2.24').found()
-    gtk_ver = '2'
-  else
-    message('gtk version should greate 2.24')
-  endif
-endif
-
-conf.set10('WEBKIT', true)
-
-if gtk_ver == '2'
-  conf.set10('GTK2', true)
-endif
-
 if get_option('dbus')
   dbus_glib_dep = dependency('dbus-glib-1', required: false)
 endif
@@ -92,40 +75,91 @@ common_deps = [
     libxml_dep,
 ]
 
-if gtk_ver == '2'
-  glade_dep = dependency('libglade-2.0')
-  webkit_dep = dependency('webkit-1.0')
-    common_deps += [glade_dep, webkit_dep]
-  if get_option('webkit-editor')
-    conf.set('USE_WEBKIT_EDITOR', 1)
-    common_deps += dependency('gtk+-2.0')
-  elif dependency('gtkhtml-editor-3.14', required: false).found()
-    gtkhtml_editor_dep = dependency('gtkhtml-editor-3.14')
-    common_deps += [gtk2_dep, gtkhtml_editor_dep, dependency('libgtkhtml-3.14', version: '>= 3.23')]
-  endif
+conf.set10('WEBKIT', true)
+
+# check gtk version
+gtk_ver = get_option('gtk')
+gtk3_dep = dependency('gtk+-3.0', required: false)
+if gtk_ver == 'auto' and gtk3_dep.found()
+  gtk_ver = '3'
 else
-  # gtk3
-  common_deps += dependency('gtk+-3.0')
+  gtk_ver = '2'
+endif
+
+if gtk_ver == '3'
+  common_deps += [ gtk3_dep ]
   conf.set10('USE_GTK_3', true)
   conf.set10('USE_GTKBUILDER', true)
-  if get_option('webkit-editor')
-    conf.set10('USE_WEBKIT_EDITOR', true)
-    common_deps += [ dependency('webkitgtk-3.0')]
-  else
-    libgtkhtml_dep = dependency('libgtkhtml-4.0')
-    common_deps += [libgtkhtml_dep]
-    gtkhtml_editor_dep = dependency('gtkhtml-editor-4.0')
-    common_deps += [gtkhtml_editor_dep]
-    webkit2gtk_dep = dependency('webkit2gtk-4.0', required: false)
-    if get_option('webkit2') and webkit2gtk_dep.found()
-      common_deps += [webkit2gtk_dep]
-      conf.set10('USE_WEBKIT2', true)
-    elif dependency('webkitgtk-3.0', required: false).found()
-      webkitgtk_dep = dependency('webkitgtk-3.0')
-      common_deps += [webkitgtk_dep]
+else
+  common_deps += [
+    dependency('gtk+-2.0'),
+    dependency('libglade-2.0'),
+    ]
+  conf.set10('GTK2', true)
+endif
+
+# check html editor lib
+# gtk3: webkit2gtk => webkitgtk => gtkhtml
+# gtk2:               webkitgtk => gtkhtml
+editor = get_option('editor')
+webkit2gtk_dep = dependency('webkit2gtk-4.0', required: false)
+webkitgtk_dep = dependency('webkitgtk-3.0', required: false)
+gtkhtml_dep = dependency('gtkhtml-editor-4.0', required: false)
+if editor == 'auto'
+  if gtk_ver = '3'
+    if webkit2gtk_dep.found()
+      editor = 'webkit2gtk'
+    elif webkitgtk_dep.found()
+      editor = 'webkitgtk'
+    elif gtkhtml_dep.found()
+      editor = 'gtkhtml'
+    else
+      editor = 'disable'
+    endif
+  elif gtk_ver = '2'
+    if webkitgtk_dep.found()
+      editor = 'webkitgtk'
+    elif gtkhtml_dep.found()
+      editor = 'gtkhtml'
+    else
+      editor = 'disable'
     endif
   endif
 endif
+
+if editor == 'webkit2gtk'
+  conf.set('USE_WEBKIT2_EDITOR', 1)
+  common_deps += [ webkit2gtk_dep ]
+elif editor == 'webkitgtk'
+  conf.set('USE_WEBKIT_EDITOR', 1)
+  common_deps += [ webkitgtk_dep ]
+elif editor == 'gtkhtml'
+  common_deps += [ gtkhtml_dep ]
+else
+  message('disable editor')
+endif
+#####################
+#      common_deps += [ webkitgtk_dep ]
+#      dependency('webkitgtk-3.0')]
+#    if get_option('webkit2') and webkit2gtk_dep.found()
+#    if dependency('webkitgtk-3.0').found()
+#      common_deps += [ dependency('webkitgtk-3.0')]
+#    if dependency('gtk+-3.0').found()
+#      gtk_ver = '3'
+#  elif gtk_ver = '2'
+#  elif dependency('gtk+-2.0', version: '>= 2.24').found()
+#    gtk_ver = '2'
+#  else
+#    message('gtk version should greate 2.24')
+#  endif
+#endif
+#  if get_option('webkit-editor')
+#    conf.set('USE_WEBKIT_EDITOR', 1)
+#    common_deps += dependency('gtk+-2.0')
+#  elif dependency('gtkhtml-editor-3.14', required: false).found()
+#    gtkhtml_editor_dep = dependency('gtkhtml-editor-3.14')
+#    common_deps += [gtk2_dep, gtkhtml_editor_dep, dependency('libgtkhtml-3.14', version: '>= 3.23')]
+#  endif
 
 unix_print_dep = dependency('gtk+-unix-print-2.0')
 sword_dep = dependency('sword')
@@ -162,7 +196,6 @@ configure_file(
 
 root_dir = include_directories('.')
 src_dir = include_directories('./src')
-asrc_dir = include_directories('build')
 
 subdir('po')
 subdir('ui')
